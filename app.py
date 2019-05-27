@@ -4,13 +4,13 @@ from kivy.uix.gridlayout import GridLayout
 from kivy.uix.textinput import TextInput
 from kivy.uix.widget import Widget
 
-class Layout(Widget):
+class LayoutView(Widget):
     pass
 
 class LiftSimulator(App):
-    
+
     def build(self):
-        return Layout()
+        return LayoutView()
 
 if __name__ == "__main__":
     LiftSimulator().run()
