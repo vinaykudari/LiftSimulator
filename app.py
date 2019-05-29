@@ -3,9 +3,14 @@ from kivy.uix.label import Label
 from kivy.uix.gridlayout import GridLayout
 from kivy.uix.textinput import TextInput
 from kivy.uix.widget import Widget
+from kivy.properties import ObjectProperty
 
 class LayoutView(Widget):
-    pass
+    name = ObjectProperty(None)
+    email = ObjectProperty(None)
+
+    def button_press(self):
+        print("Name : ", self.name.text, " Email : ", self.email.text)
 
 class LiftSimulator(App):
 

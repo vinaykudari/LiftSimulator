@@ -1,4 +1,6 @@
-<LayoutView>
+<LayoutView>:
+    name:name
+    email:email
     GridLayout:
         cols:1
         size:root.width, root.height
@@ -7,10 +9,13 @@
             Label:
                 text:"Name: "
             TextInput:
+                id:name
                 multinline:True
             Label:
                 text:"Email: "
             TextInput:
+                id:email
                 multiline:True
         Button:
             text:"Submit"
+            on_press:root.button_press()
