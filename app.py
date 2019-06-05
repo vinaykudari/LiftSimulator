@@ -30,8 +30,8 @@ class LiftSimulator:
                 for floor in range(self.floors):
                     floor_num = self.myfont.render(str(self.floors-(floor+1)), True, (0, 0, 0))
                     pygame.draw.rect(block, (255, 0, 0), pygame.Rect(10, 15+floor*30, 40, 15))
-                    block.convert()
                     block.blit(floor_num, (30, 17+floor*30))
+                block = block.convert()
                 background.blit(block, (50+75*lift, 100))
         background = background.convert()
         self.screen.blit(background, (0,0))
