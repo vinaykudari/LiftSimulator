@@ -1,9 +1,11 @@
 import pygame
 
 class LiftSimulator:
-
+    
     def __init__(self, floors, lifts):
         pygame.init()
+        pygame.font.init()
+        self.myfont = pygame.font.Font(None, 18)
         self.floors = floors
         self.lifts = lifts
         self.screen = pygame.display.set_mode((1000, 500))
@@ -26,7 +28,10 @@ class LiftSimulator:
             w, h = block.get_size()
             for lift in range(self.lifts):
                 for floor in range(self.floors):
+                    floor_num = self.myfont.render(str(self.floors-(floor+1)), True, (0, 0, 0))
                     pygame.draw.rect(block, (255, 0, 0), pygame.Rect(10, 15+floor*30, 40, 15))
+                    block.convert()
+                    block.blit(floor_num, (30, 17+floor*30))
                 background.blit(block, (50+75*lift, 100))
         background = background.convert()
         self.screen.blit(background, (0,0))
