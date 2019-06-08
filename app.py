@@ -27,9 +27,10 @@ class LiftSimulator:
         self.floors = floors
         self.lifts = lifts
         self.pos_dic = TwoWayDict()
-        self.screen = pygame.display.set_mode((1000, 500))
+        self.screen = pygame.display.set_mode((800, 600), pygame.RESIZABLE)
 
     def get_request_location(self):
+        """performance can be optimized here"""
         fil = filter(self.is_pressed, [i if type(i) == tuple else (0, 0, 0, 0) for i in self.pos_dic.values()])
         if len(fil) == 0:
             pass
@@ -57,6 +58,9 @@ class LiftSimulator:
                 if event.type == pygame.MOUSEBUTTONDOWN:
                     self.pos = pygame.mouse.get_pos()
                     self.get_request_location()
+                if event.type == pygame.VIDEORESIZE:
+                    pygame.display.set_mode((event.w, event.h), pygame.RESIZABLE)
+                    self.generate_structure()
     
     def generate_structure(self):
         floor = []
@@ -75,7 +79,7 @@ class LiftSimulator:
                 pygame.draw.rect(block, (255, 0, 0), pygame.Rect(rect_x, rect_y, self.brick_w, self.brick_h))
                 brick_pos_x = block_x+rect_x+self.brick_w*lift+35*lift
                 brick_pos_y = block_y+rect_y
-                self.pos_dic[str(lift)+str(self.floors-(floor+1))]=self.get_brick_coordinates((brick_pos_x, brick_pos_y))
+                self.pos_dic[str(lift)+','+str(self.floors-(floor+1))]=self.get_brick_coordinates((brick_pos_x, brick_pos_y))
                 block.blit(floor_num, (brick_x, brick_y))
             block = block.convert()
             background.blit(block, (block_x+75*lift, block_y))
@@ -84,4 +88,4 @@ class LiftSimulator:
         pygame.display.flip()
             
 
-lift = LiftSimulator(floors=5, lifts=4).run()
+lift = LiftSimulator(floors=3, lifts=5).run()
